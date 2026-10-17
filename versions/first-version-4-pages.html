@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday 🎉</title>
+<style>
+:root{color-scheme:dark;--bg1:#1b0b3a;--bg2:#4a1a6b;--tx:#fff;--ac:#ffd166;--ac2:#ff5d8f;--card:rgba(255,255,255,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){color-scheme:light;--bg1:#ffe3ef;--bg2:#d9c8ff;--tx:#2a1245;--ac:#d6336c;--ac2:#7048e8;--card:rgba(255,255,255,.65)}}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden;font-family:"Poppins","Segoe UI",system-ui,sans-serif;color:var(--tx);background:linear-gradient(135deg,var(--bg1),var(--bg2))}
+#stage{position:relative;height:100%;perspective:1400px;overflow:hidden}
+.page{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:20px 20px 80px;text-align:center;opacity:0;pointer-events:none;transform:rotateY(90deg) scale(.8);transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .6s;transform-origin:center}
+.page.active{opacity:1;pointer-events:auto;transform:none}
+.page.prev{transform:rotateY(-90deg) scale(.8)}
+h1{font-size:clamp(2rem,7vw,4rem);line-height:1.1;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(1.5rem,5vw,2.4rem);color:var(--ac)}
+p{max-width:520px;line-height:1.6;font-size:1.05rem}
+.btn{border:0;border-radius:40px;padding:12px 28px;font-size:1rem;font-weight:600;color:#1b0b3a;background:linear-gradient(90deg,var(--ac),var(--ac2));cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.3);transition:transform .2s}
+.btn:hover{transform:translateY(-3px) scale(1.05)}
+/* nav */
+nav{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);display:flex;justify-content:center;gap:12px;z-index:5}
+nav i{width:12px;height:12px;border-radius:50%;background:var(--card);border:2px solid var(--ac);cursor:pointer;transition:.3s}
+nav i.on{background:var(--ac);transform:scale(1.4)}
+/* page 1 cube */
+.scene{width:130px;height:130px;perspective:700px;margin-bottom:30px}
+.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 9s linear infinite}
+.cube div{position:absolute;width:130px;height:130px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:var(--card);border:2px solid var(--ac);border-radius:14px;backdrop-filter:blur(4px)}
+.cube div:nth-child(1){transform:translateZ(65px)}
+.cube div:nth-child(2){transform:rotateY(90deg) translateZ(65px)}
+.cube div:nth-child(3){transform:rotateY(180deg) translateZ(65px)}
+.cube div:nth-child(4){transform:rotateY(-90deg) translateZ(65px)}
+.cube div:nth-child(5){transform:rotateX(90deg) translateZ(65px)}
+.cube div:nth-child(6){transform:rotateX(-90deg) translateZ(65px)}
+@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}}
+/* page 2 flip cards */
+.cards{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;perspective:900px}
+.flip{width:200px;height:220px;position:relative;transform-style:preserve-3d;transition:transform .8s;cursor:pointer;animation:float 4s ease-in-out infinite}
+.flip:nth-child(2){animation-delay:.6s}.flip:nth-child(3){animation-delay:1.2s}
+.flip:hover,.flip.on{transform:rotateY(180deg)}
+.flip>div{position:absolute;inset:0;border-radius:18px;display:flex;align-items:center;justify-content:center;padding:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:2px solid var(--ac);font-size:1rem;line-height:1.5}
+.flip .f{font-size:3.4rem}
+.flip .b{transform:rotateY(180deg);background:linear-gradient(135deg,var(--ac2),var(--ac));color:#1b0b3a;font-weight:600}
+@keyframes float{50%{margin-top:-12px}}
+/* page 3 ring */
+.ringwrap{width:170px;height:200px;perspective:1000px;margin:20px 0 40px}
+.ring{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:ring 16s linear infinite}
+.ring div{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:3rem;background:var(--card);border:2px solid var(--ac);backdrop-filter:blur(4px)}
+.ring small{font-size:.85rem}
+.ring div:nth-child(1){transform:rotateY(0) translateZ(260px)}
+.ring div:nth-child(2){transform:rotateY(60deg) translateZ(260px)}
+.ring div:nth-child(3){transform:rotateY(120deg) translateZ(260px)}
+.ring div:nth-child(4){transform:rotateY(180deg) translateZ(260px)}
+.ring div:nth-child(5){transform:rotateY(240deg) translateZ(260px)}
+.ring div:nth-child(6){transform:rotateY(300deg) translateZ(260px)}
+@keyframes ring{to{transform:rotateY(-360deg)}}
+@media(max-width:560px){.ring div:nth-child(n){--z:170px}.ring div:nth-child(1){transform:rotateY(0) translateZ(170px)}.ring div:nth-child(2){transform:rotateY(60deg) translateZ(170px)}.ring div:nth-child(3){transform:rotateY(120deg) translateZ(170px)}.ring div:nth-child(4){transform:rotateY(180deg) translateZ(170px)}.ring div:nth-child(5){transform:rotateY(240deg) translateZ(170px)}.ring div:nth-child(6){transform:rotateY(300deg) translateZ(170px)}.ringwrap{width:120px;height:160px}}
+/* page 4 cake */
+.cake{font-size:6rem;cursor:pointer;animation:bob 2.5s ease-in-out infinite;transform-style:preserve-3d;filter:drop-shadow(0 20px 20px rgba(0,0,0,.35))}
+.cake:hover{transform:rotateY(360deg);transition:transform 1.2s}
+@keyframes bob{50%{transform:translateY(-14px) rotateY(20deg)}}
+#msg{min-height:3em}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:4}
+.balloon{position:fixed;bottom:-80px;font-size:2.6rem;z-index:3;animation:up linear forwards;pointer-events:none}
+@keyframes up{to{transform:translateY(-120vh) rotate(20deg)}}
+</style>
+</head>
+<body>
+<div id="stage">
+  <section class="page active">
+    <div class="scene"><div class="cube"><div>🎂</div><div>🎁</div><div>🎈</div><div>🎉</div><div>⭐</div><div>💖</div></div></div>
+    <h1>Happy Birthday<br><span class="nm"></span>!</h1>
+    <p>Indha naal unakkaga mattum 💫 Oru chinna surprise ready pannirukken, next click pannu!</p>
+    <button class="btn" onclick="go(1)">Start 🎁</button>
+  </section>
+
+  <section class="page">
+    <h2>My Wishes for You 💌</h2>
+    <p>Each card-aiyum tap pannu, flip aagum!</p>
+    <div class="cards">
+      <div class="flip"><div class="f">😊</div><div class="b">Un smile epavum ippadiye bright-ah irukkanum. Happiness always!</div></div>
+      <div class="flip"><div class="f">🚀</div><div class="b">Ella dreams-um intha varusham nijama maaranum. Go get them!</div></div>
+      <div class="flip"><div class="f">🤝</div><div class="b">Nee en best friend, epavum un kooda irupen. Always!</div></div>
+    </div>
+    <button class="btn" onclick="go(2)">Next 📸</button>
+  </section>
+
+  <section class="page">
+    <h2>Our Memories 📸</h2>
+    <p>Nama sernthu pannina fun moments...</p>
+    <div class="ringwrap"><div class="ring">
+      <div>🍕<small>Food outings</small></div>
+      <div>🎬<small>Movie nights</small></div>
+      <div>🌴<small>Trips</small></div>
+      <div>😂<small>Endless jokes</small></div>
+      <div>📚<small>Study days</small></div>
+      <div>🎶<small>Music vibes</small></div>
+    </div></div>
+    <button class="btn" onclick="go(3)">Final Surprise 🎂</button>
+  </section>
+
+  <section class="page">
+    <h2>Make a Wish! 🕯️</h2>
+    <div class="cake" id="cake" title="Tap me">🎂</div>
+    <p id="msg">Cake mela tap pannu, wish pannitu candle-ai oothu! 🌟</p>
+    <button class="btn" onclick="party()">🎉 Celebrate</button>
+    <button class="btn" style="background:var(--card);color:var(--tx)" onclick="go(0)">↺ Replay</button>
+  </section>
+</div>
+<nav></nav>
+<canvas id="cv"></canvas>
+<script>
+// Name maatha: URL-la ?name=Priya podu, illana inga mathi eluthu
+var q=new URLSearchParams(location.search).get("name");
+var NAME=q||"My Friend";
+document.querySelectorAll(".nm").forEach(function(e){e.textContent=NAME});
+var pages=[].slice.call(document.querySelectorAll(".page")),cur=0,nav=document.querySelector("nav");
+pages.forEach(function(_,i){var d=document.createElement("i");d.onclick=function(){go(i)};nav.appendChild(d)});
+function go(n){cur=n;pages.forEach(function(p,i){p.className="page"+(i===n?" active":i<n?" prev":"")});[].forEach.call(nav.children,function(d,i){d.className=i===n?"on":""});if(n===3)setTimeout(party,700)}
+go(0);
+document.querySelectorAll(".flip").forEach(function(f){f.onclick=function(){f.classList.toggle("on")}});
+var cv=document.getElementById("cv"),cx=cv.getContext("2d"),bits=[];
+function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();onresize=rs;
+function party(){for(var i=0;i<160;i++)bits.push({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*16,vy:Math.random()*-16-2,c:"hsl("+Math.random()*360+",90%,60%)",s:Math.random()*7+3,r:Math.random()*6});
+for(var j=0;j<10;j++){var b=document.createElement("div");b.className="balloon";b.textContent="🎈";b.style.left=Math.random()*95+"vw";b.style.animationDuration=(4+Math.random()*4)+"s";document.body.appendChild(b);setTimeout(function(x){x.remove()},9000,b)}}
+(function t(){cx.clearRect(0,0,cv.width,cv.height);bits=bits.filter(function(p){return p.y<cv.height+20});bits.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.vy+=.35;p.r+=.2;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);cx.restore()});requestAnimationFrame(t)})();
+document.getElementById("cake").onclick=function(){document.getElementById("msg").innerHTML="Wish pannita? 🥳 <b>Happy Birthday "+NAME+"!</b> Un wish nijama aagum! Love you da/di 💖";party()};
+document.onkeydown=function(e){if(e.key==="ArrowRight"&&cur<3)go(cur+1);if(e.key==="ArrowLeft"&&cur>0)go(cur-1)};
+</script>
+</body>
+</html>
